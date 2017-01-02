@@ -13,6 +13,11 @@
 		4E30F6161E1A0B7000CD03F3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E30F6141E1A0B7000CD03F3 /* Main.storyboard */; };
 		4E30F6181E1A0B7000CD03F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E30F6171E1A0B7000CD03F3 /* Assets.xcassets */; };
 		4E30F61B1E1A0B7000CD03F3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E30F6191E1A0B7000CD03F3 /* LaunchScreen.storyboard */; };
+		4E651A131E1A3462005575B0 /* DICSwipeTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E651A121E1A3462005575B0 /* DICSwipeTabView.m */; };
+		4E651A171E1A34ED005575B0 /* DICSwipeTabBarCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E651A161E1A34ED005575B0 /* DICSwipeTabBarCollectionViewCell.m */; };
+		4E651A1A1E1A350D005575B0 /* DICSwipeTabDetailCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E651A191E1A350D005575B0 /* DICSwipeTabDetailCollectionViewCell.m */; };
+		4E651A1D1E1A35B7005575B0 /* DICSwipeTabDetailCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E651A1C1E1A35B7005575B0 /* DICSwipeTabDetailCollectionViewController.m */; };
+		4E651A201E1A35D5005575B0 /* DICSwipeTabBarCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E651A1F1E1A35D5005575B0 /* DICSwipeTabBarCollectionViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +31,16 @@
 		4E30F6171E1A0B7000CD03F3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4E30F61A1E1A0B7000CD03F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4E30F61C1E1A0B7000CD03F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4E651A111E1A3462005575B0 /* DICSwipeTabView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DICSwipeTabView.h; path = DICSwipeTabView/DICSwipeTabView.h; sourceTree = "<group>"; };
+		4E651A121E1A3462005575B0 /* DICSwipeTabView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DICSwipeTabView.m; path = DICSwipeTabView/DICSwipeTabView.m; sourceTree = "<group>"; };
+		4E651A151E1A34ED005575B0 /* DICSwipeTabBarCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DICSwipeTabBarCollectionViewCell.h; path = DICSwipeTabView/DICSwipeTabBarCollectionViewCell.h; sourceTree = "<group>"; };
+		4E651A161E1A34ED005575B0 /* DICSwipeTabBarCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DICSwipeTabBarCollectionViewCell.m; path = DICSwipeTabView/DICSwipeTabBarCollectionViewCell.m; sourceTree = "<group>"; };
+		4E651A181E1A350D005575B0 /* DICSwipeTabDetailCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DICSwipeTabDetailCollectionViewCell.h; path = DICSwipeTabView/DICSwipeTabDetailCollectionViewCell.h; sourceTree = "<group>"; };
+		4E651A191E1A350D005575B0 /* DICSwipeTabDetailCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DICSwipeTabDetailCollectionViewCell.m; path = DICSwipeTabView/DICSwipeTabDetailCollectionViewCell.m; sourceTree = "<group>"; };
+		4E651A1B1E1A35B7005575B0 /* DICSwipeTabDetailCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DICSwipeTabDetailCollectionViewController.h; path = DICSwipeTabView/DICSwipeTabDetailCollectionViewController.h; sourceTree = "<group>"; };
+		4E651A1C1E1A35B7005575B0 /* DICSwipeTabDetailCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DICSwipeTabDetailCollectionViewController.m; path = DICSwipeTabView/DICSwipeTabDetailCollectionViewController.m; sourceTree = "<group>"; };
+		4E651A1E1E1A35D5005575B0 /* DICSwipeTabBarCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DICSwipeTabBarCollectionViewController.h; path = DICSwipeTabView/DICSwipeTabBarCollectionViewController.h; sourceTree = "<group>"; };
+		4E651A1F1E1A35D5005575B0 /* DICSwipeTabBarCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DICSwipeTabBarCollectionViewController.m; path = DICSwipeTabView/DICSwipeTabBarCollectionViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +73,7 @@
 		4E30F60A1E1A0B7000CD03F3 /* DICSwipeTabView */ = {
 			isa = PBXGroup;
 			children = (
+				4E651A101E1A33FB005575B0 /* DICSwipeTabView */,
 				4E30F60E1E1A0B7000CD03F3 /* AppDelegate.h */,
 				4E30F60F1E1A0B7000CD03F3 /* AppDelegate.m */,
 				4E30F6111E1A0B7000CD03F3 /* ViewController.h */,
@@ -77,6 +93,31 @@
 				4E30F60C1E1A0B7000CD03F3 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4E651A101E1A33FB005575B0 /* DICSwipeTabView */ = {
+			isa = PBXGroup;
+			children = (
+				4E651A141E1A346A005575B0 /* Cells */,
+				4E651A111E1A3462005575B0 /* DICSwipeTabView.h */,
+				4E651A121E1A3462005575B0 /* DICSwipeTabView.m */,
+				4E651A1B1E1A35B7005575B0 /* DICSwipeTabDetailCollectionViewController.h */,
+				4E651A1C1E1A35B7005575B0 /* DICSwipeTabDetailCollectionViewController.m */,
+				4E651A1E1E1A35D5005575B0 /* DICSwipeTabBarCollectionViewController.h */,
+				4E651A1F1E1A35D5005575B0 /* DICSwipeTabBarCollectionViewController.m */,
+			);
+			name = DICSwipeTabView;
+			sourceTree = "<group>";
+		};
+		4E651A141E1A346A005575B0 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				4E651A151E1A34ED005575B0 /* DICSwipeTabBarCollectionViewCell.h */,
+				4E651A161E1A34ED005575B0 /* DICSwipeTabBarCollectionViewCell.m */,
+				4E651A181E1A350D005575B0 /* DICSwipeTabDetailCollectionViewCell.h */,
+				4E651A191E1A350D005575B0 /* DICSwipeTabDetailCollectionViewCell.m */,
+			);
+			name = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -151,8 +192,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E651A171E1A34ED005575B0 /* DICSwipeTabBarCollectionViewCell.m in Sources */,
+				4E651A1A1E1A350D005575B0 /* DICSwipeTabDetailCollectionViewCell.m in Sources */,
+				4E651A201E1A35D5005575B0 /* DICSwipeTabBarCollectionViewController.m in Sources */,
 				4E30F6131E1A0B7000CD03F3 /* ViewController.m in Sources */,
 				4E30F6101E1A0B7000CD03F3 /* AppDelegate.m in Sources */,
+				4E651A1D1E1A35B7005575B0 /* DICSwipeTabDetailCollectionViewController.m in Sources */,
+				4E651A131E1A3462005575B0 /* DICSwipeTabView.m in Sources */,
 				4E30F60D1E1A0B7000CD03F3 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -312,6 +358,7 @@
 				4E30F6211E1A0B7000CD03F3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
