@@ -1,5 +1,5 @@
 //
-//  DICSwipeTabView.h
+//  DICSwipeCollectionViewLayout.h
 //  DICSwipeTabView
 //
 //  Created by GAOCE on 2017/1/2.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DICSwipeTabView : UIView
-- (instancetype) initWithTitleArray:(NSArray *)titleArray;
+@interface DICSwipeCollectionViewLayout : UICollectionViewLayout
+
 @end

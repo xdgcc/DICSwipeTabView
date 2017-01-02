@@ -1,5 +1,5 @@
 //
-//  DICSwipeTabBarCollectionViewController.h
+//  DICSwipeTabDetailCollectionView.h
 //  DICSwipeTabView
 //
 //  Created by GAOCE on 2017/1/2.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DICSwipeTabBarCollectionViewController : UICollectionViewController
+@interface DICSwipeTabDetailCollectionView : UICollectionView
 
 @end

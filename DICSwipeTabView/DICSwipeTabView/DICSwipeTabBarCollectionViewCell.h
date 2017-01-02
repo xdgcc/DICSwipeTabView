@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface DICSwipeTabBarCollectionViewCell : UICollectionViewCell
-
+- (void) updateViewByStr:(NSString *)title;
 @end

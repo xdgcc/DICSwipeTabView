@@ -7,7 +7,8 @@
 //
 
 #import "ViewController.h"
-
+#import "DICSwipeTabView.h"
+#import "PureLayout.h"
 @interface ViewController ()
 
 @end
@@ -17,6 +18,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    DICSwipeTabView *testView = [[DICSwipeTabView alloc] initWithTitleArray:@[@"hehe",@"xixi",@"hengheng"]];
+    [self.view addSubview:testView];
+    
+    [testView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero];
+    
 }
 
 
