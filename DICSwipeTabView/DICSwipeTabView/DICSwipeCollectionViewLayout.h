@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DICSwipeCollectionViewLayout : UICollectionViewLayout
+@interface DICSwipeCollectionViewLayout : UICollectionViewFlowLayout
 
 @end
