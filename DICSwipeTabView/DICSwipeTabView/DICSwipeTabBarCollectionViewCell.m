@@ -8,6 +8,7 @@
 
 #import "DICSwipeTabBarCollectionViewCell.h"
 #import "PureLayout.h"
+
 @interface DICSwipeTabBarCollectionViewCell ()
 @property (nonatomic, strong) UIView *lineView;
 @property (nonatomic, strong) UILabel *titleLabel;

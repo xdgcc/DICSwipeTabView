@@ -7,16 +7,10 @@
 //
 
 #import "DICSwipeTabView.h"
-
 #import "PureLayout.h"
-
 #import "DICSwipeTabBarCollectionViewCell.h"
 #import "DICSwipeTabDetailCollectionViewCell.h"
-
-
 #import "DICSwipeCollectionViewLayout.h"
-
-
 
 #define TopBarCollectionViewTag 1000
 #define BottomDetialCollectionViewTag 1001
@@ -25,12 +19,10 @@ static NSString *DICSwipeTabBarCollectionViewCellIdentifier = @"DICSwipeTabBarCo
 static NSString *DICSwipeTabDetailCollectionViewCellIdentifier = @"DICSwipeTabDetailCollectionViewCell";
 
 
-
 @interface DICSwipeTabView ()<UICollectionViewDelegate,UICollectionViewDataSource,UIScrollViewDelegate>
 
 @property (nonatomic, strong) NSArray *titleArray;
 @property (nonatomic, strong) NSMutableArray *viewArray;
-
 
 @property (nonatomic, assign) NSInteger tabCount;
 @property (nonatomic, assign) CGFloat tabBarHeight;
@@ -76,7 +68,6 @@ static NSString *DICSwipeTabDetailCollectionViewCellIdentifier = @"DICSwipeTabDe
 }
 
 - (void) setCollectionViews {
-    
     self.topBarView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.tabBarHeight) collectionViewLayout:self.topBarViewLayout];
     self.topBarView.collectionViewLayout = self.topBarViewLayout;
     self.topBarView.tag = TopBarCollectionViewTag;
@@ -86,7 +77,6 @@ static NSString *DICSwipeTabDetailCollectionViewCellIdentifier = @"DICSwipeTabDe
     self.topBarView.showsVerticalScrollIndicator = NO;
     self.topBarView.showsHorizontalScrollIndicator = NO;
     [self addSubview:self.topBarView];
-    
     
     [self.topBarView registerClass:[DICSwipeTabBarCollectionViewCell class] forCellWithReuseIdentifier:DICSwipeTabBarCollectionViewCellIdentifier];
     
@@ -101,14 +91,8 @@ static NSString *DICSwipeTabDetailCollectionViewCellIdentifier = @"DICSwipeTabDe
     self.bottomDetialView.showsHorizontalScrollIndicator = NO;
     [self addSubview:self.bottomDetialView];
     
-    
     [self.bottomDetialView registerClass:[DICSwipeTabDetailCollectionViewCell class] forCellWithReuseIdentifier:DICSwipeTabDetailCollectionViewCellIdentifier];
 }
-
-
-
-
-
 
 #pragma mark - datasource & delegate
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -119,20 +103,16 @@ static NSString *DICSwipeTabDetailCollectionViewCellIdentifier = @"DICSwipeTabDe
     return self.titleArray.count;
 }
 
-
-
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     UICollectionViewCell *cell = nil;
     switch (collectionView.tag) {
         case TopBarCollectionViewTag: {
-            //加载顶部bar的cell
             DICSwipeTabBarCollectionViewCell *tmpCell = [collectionView dequeueReusableCellWithReuseIdentifier:DICSwipeTabBarCollectionViewCellIdentifier forIndexPath:indexPath];
             [tmpCell updateViewByStr:self.titleArray[indexPath.row]];
             cell = tmpCell;
             break;
         }
         case BottomDetialCollectionViewTag: {
-            //加载底部view的cell
             DICSwipeTabDetailCollectionViewCell *tmpCell = [collectionView dequeueReusableCellWithReuseIdentifier:DICSwipeTabDetailCollectionViewCellIdentifier forIndexPath:indexPath];
             [tmpCell updateViewByDetialView:self.viewArray[indexPath.row]];
             cell = tmpCell;
@@ -147,16 +127,9 @@ static NSString *DICSwipeTabDetailCollectionViewCellIdentifier = @"DICSwipeTabDe
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     switch (collectionView.tag) {
         case TopBarCollectionViewTag: {
-            //标记选中，刷新veiw等操作
-            //底部跟着响应的cell滑动
-            
             DICSwipeTabBarCollectionViewCell *cell = (DICSwipeTabBarCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
             cell.selected = YES;
-
-            
             [self.bottomDetialView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:NO];
-            
-            
             break;
         }
         case BottomDetialCollectionViewTag: {
@@ -170,8 +143,6 @@ static NSString *DICSwipeTabDetailCollectionViewCellIdentifier = @"DICSwipeTabDe
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
     switch (collectionView.tag) {
         case TopBarCollectionViewTag: {
-            //取消标记选中
-            
             DICSwipeTabBarCollectionViewCell *cell = (DICSwipeTabBarCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
             cell.selected = NO;
             break;
@@ -194,11 +165,8 @@ static NSString *DICSwipeTabDetailCollectionViewCellIdentifier = @"DICSwipeTabDe
 
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    // 将collectionView在控制器view的中心点转化成collectionView上的坐标
     CGPoint pInView = [self convertPoint:self.bottomDetialView.center toView:self.bottomDetialView];
-    // 获取这一点的indexPath
     NSIndexPath *indexPathNow = [self.bottomDetialView indexPathForItemAtPoint:pInView];
-    // 赋值给记录当前坐标的变量
     self.formerIndexPath = indexPathNow;
     [self.topBarView selectItemAtIndexPath:self.formerIndexPath animated:YES scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
     [self.topBarView scrollToItemAtIndexPath:self.formerIndexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:NO];
@@ -206,13 +174,10 @@ static NSString *DICSwipeTabDetailCollectionViewCellIdentifier = @"DICSwipeTabDe
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     CGPoint pInView = [self convertPoint:self.bottomDetialView.center toView:self.bottomDetialView];
-    // 获取这一点的indexPath
     NSIndexPath *indexPathNow = [self.bottomDetialView indexPathForItemAtPoint:pInView];
-    // 赋值给记录当前坐标的变量
     self.currentIndexPath = indexPathNow;
     [self.topBarView selectItemAtIndexPath:self.currentIndexPath animated:YES scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
     [self.topBarView scrollToItemAtIndexPath:self.currentIndexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:NO];
-
 }
 
 
