@@ -19,10 +19,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    DICSwipeTabView *testView = [[DICSwipeTabView alloc] initWithTitleArray:@[@"hehe",@"xixi",@"hengheng"]];
+    DICSwipeTabView *testView = [[DICSwipeTabView alloc] initWithFrame:CGRectMake(0, 50, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height-50) withTabBarHeight:50 withSeparateLineHeight:5 withTitleArray:@[@"xixi",@"hehe",@"haha"]  withViewArray:nil];
+    
     [self.view addSubview:testView];
     
-    [testView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero];
+    //[testView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero];
     
 }
 

@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface DICSwipeCollectionViewLayout : UICollectionViewFlowLayout
-
+- (instancetype)initWithItemSize:(CGSize)size;
 @end

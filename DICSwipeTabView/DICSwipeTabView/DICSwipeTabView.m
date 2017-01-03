@@ -26,9 +26,16 @@ static NSString *DICSwipeTabDetailCollectionViewCellIdentifier = @"DICSwipeTabDe
 
 
 
-@interface DICSwipeTabView ()<UICollectionViewDelegate,UICollectionViewDataSource>
+@interface DICSwipeTabView ()<UICollectionViewDelegate,UICollectionViewDataSource,UIScrollViewDelegate>
 
 @property (nonatomic, strong) NSArray *titleArray;
+@property (nonatomic, strong) NSArray *viewArray;
+
+
+@property (nonatomic, assign) NSInteger tabCount;
+@property (nonatomic, assign) CGFloat tabBarHeight;
+@property (nonatomic, assign) CGFloat separateLineHeight;
+@property (nonatomic, assign) CGFloat detialViewHeight;
 
 @property (nonatomic, strong) UICollectionView *topBarView;
 @property (nonatomic, strong) UICollectionView *bottomDetialView;
@@ -36,20 +43,23 @@ static NSString *DICSwipeTabDetailCollectionViewCellIdentifier = @"DICSwipeTabDe
 @property (nonatomic, strong) DICSwipeCollectionViewLayout *topBarViewLayout;
 @property (nonatomic, strong) DICSwipeCollectionViewLayout *bottomDetialViewLayout;
 
+@property (nonatomic, strong) NSIndexPath *formerIndexPath;
+@property (nonatomic, strong) NSIndexPath *currentIndexPath;
+
 @end
-
-
-
-
-
 
 
 @implementation DICSwipeTabView
 
-- (instancetype) initWithTitleArray:(NSArray *)titleArray {
-    self = [super initForAutoLayout];
+- (instancetype) initWithFrame:(CGRect)frame withTabBarHeight:(CGFloat)tabBarHeight withSeparateLineHeight:(CGFloat)separateLineHeight withTitleArray:(NSArray *)titleArray withViewArray:(NSArray *)viewArray {
+    self = [super initWithFrame:frame];
     if (self) {
+        self.tabBarHeight = tabBarHeight;
+        self.separateLineHeight = separateLineHeight;
+        self.detialViewHeight = frame.size.height - tabBarHeight - separateLineHeight;
         self.titleArray = titleArray;
+        self.viewArray = viewArray;
+        self.tabCount = (titleArray.count > 3) ? 3: titleArray.count;
         [self setCollectionViewLayouts];
         [self setCollectionViews];
         
@@ -58,13 +68,13 @@ static NSString *DICSwipeTabDetailCollectionViewCellIdentifier = @"DICSwipeTabDe
 }
 
 - (void) setCollectionViewLayouts {
-    self.topBarViewLayout = [[DICSwipeCollectionViewLayout alloc] init];
-    self.bottomDetialViewLayout = [[DICSwipeCollectionViewLayout alloc] init];
+    self.topBarViewLayout = [[DICSwipeCollectionViewLayout alloc] initWithItemSize:CGSizeMake(self.frame.size.width/self.tabCount, self.tabBarHeight)];
+    self.bottomDetialViewLayout = [[DICSwipeCollectionViewLayout alloc] initWithItemSize:CGSizeMake(self.frame.size.width, self.detialViewHeight)];
 }
 
 - (void) setCollectionViews {
     
-    self.topBarView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, [UIScreen mainScreen].bounds.size.width-5, 60) collectionViewLayout:self.topBarViewLayout];
+    self.topBarView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.tabBarHeight) collectionViewLayout:self.topBarViewLayout];
     self.topBarView.collectionViewLayout = self.topBarViewLayout;
     self.topBarView.backgroundColor = [UIColor yellowColor];
     self.topBarView.tag = TopBarCollectionViewTag;
@@ -78,8 +88,9 @@ static NSString *DICSwipeTabDetailCollectionViewCellIdentifier = @"DICSwipeTabDe
     
     [self.topBarView registerClass:[DICSwipeTabBarCollectionViewCell class] forCellWithReuseIdentifier:DICSwipeTabBarCollectionViewCellIdentifier];
     
-    self.bottomDetialView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 130, [UIScreen mainScreen].bounds.size.width-5, 100) collectionViewLayout:self.bottomDetialViewLayout];
+    self.bottomDetialView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, self.separateLineHeight + self.tabBarHeight, self.frame.size.width, self.detialViewHeight) collectionViewLayout:self.bottomDetialViewLayout];
     self.bottomDetialView.collectionViewLayout = self.bottomDetialViewLayout;
+    self.bottomDetialView.pagingEnabled = YES;
     self.bottomDetialView.backgroundColor = [UIColor blueColor];
     self.bottomDetialView.tag = BottomDetialCollectionViewTag;
     self.bottomDetialView.delegate = self;
@@ -107,14 +118,9 @@ static NSString *DICSwipeTabDetailCollectionViewCellIdentifier = @"DICSwipeTabDe
     return self.titleArray.count;
 }
 
-//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-//    
-//    return nil;
-//    
-//}
+
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
     UICollectionViewCell *cell = nil;
     switch (collectionView.tag) {
         case TopBarCollectionViewTag: {
@@ -147,7 +153,8 @@ static NSString *DICSwipeTabDetailCollectionViewCellIdentifier = @"DICSwipeTabDe
             cell.selected = YES;
 
             
-            [self.bottomDetialView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+            [self.bottomDetialView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:NO];
+            
             
             break;
         }
@@ -176,11 +183,35 @@ static NSString *DICSwipeTabDetailCollectionViewCellIdentifier = @"DICSwipeTabDe
     }
 }
 
+
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
     if (collectionView.tag == BottomDetialCollectionViewTag) {
         [self.topBarView selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
-        [self.topBarView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+        [self.topBarView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:NO];
     }
+}
+
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    // 将collectionView在控制器view的中心点转化成collectionView上的坐标
+    CGPoint pInView = [self convertPoint:self.bottomDetialView.center toView:self.bottomDetialView];
+    // 获取这一点的indexPath
+    NSIndexPath *indexPathNow = [self.bottomDetialView indexPathForItemAtPoint:pInView];
+    // 赋值给记录当前坐标的变量
+    self.formerIndexPath = indexPathNow;
+    [self.topBarView selectItemAtIndexPath:self.formerIndexPath animated:YES scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
+    [self.topBarView scrollToItemAtIndexPath:self.formerIndexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:NO];
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    CGPoint pInView = [self convertPoint:self.bottomDetialView.center toView:self.bottomDetialView];
+    // 获取这一点的indexPath
+    NSIndexPath *indexPathNow = [self.bottomDetialView indexPathForItemAtPoint:pInView];
+    // 赋值给记录当前坐标的变量
+    self.currentIndexPath = indexPathNow;
+    [self.topBarView selectItemAtIndexPath:self.currentIndexPath animated:YES scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
+    [self.topBarView scrollToItemAtIndexPath:self.currentIndexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:NO];
+
 }
 
 

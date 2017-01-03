@@ -9,5 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface DICSwipeTabView : UIView
-- (instancetype) initWithTitleArray:(NSArray *)titleArray;
+
+- (instancetype) initWithFrame:(CGRect)frame
+              withTabBarHeight:(CGFloat)tabBarHeight
+        withSeparateLineHeight:(CGFloat)separateLineHeight
+                withTitleArray:(NSArray *)titleArray
+                 withViewArray:(NSArray *)viewArray;
 @end

@@ -19,7 +19,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        self.backgroundColor = [UIColor greenColor];
+        //self.backgroundColor = [UIColor greenColor];
         
         self.titleLabel = [[UILabel alloc] initForAutoLayout];
         [self.contentView addSubview:self.titleLabel];
@@ -33,5 +33,14 @@
 
 - (void) updateViewByIndexPath:(NSIndexPath *)indexPath {
     self.titleLabel.text = [NSString stringWithFormat:@"%@",indexPath];
+    if (indexPath.row == 0) {
+        self.backgroundColor = [UIColor greenColor];
+    } else if (indexPath.row == 1) {
+        self.backgroundColor = [UIColor orangeColor];
+    } else if (indexPath.row == 2){
+        self.backgroundColor = [UIColor lightGrayColor];
+    } else {
+        self.backgroundColor = [UIColor blueColor];
+    }
 }
 @end
