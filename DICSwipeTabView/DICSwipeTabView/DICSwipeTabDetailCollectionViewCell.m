@@ -9,7 +9,7 @@
 #import "DICSwipeTabDetailCollectionViewCell.h"
 #import "PureLayout.h"
 @interface DICSwipeTabDetailCollectionViewCell ()
-@property (nonatomic, strong) UILabel *titleLabel;
+@property (nonatomic, strong) UIView *detialView;
 
 @end
 
@@ -19,28 +19,16 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        //self.backgroundColor = [UIColor greenColor];
-        
-        self.titleLabel = [[UILabel alloc] initForAutoLayout];
-        [self.contentView addSubview:self.titleLabel];
-        
-        
-
-        [self.titleLabel autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsMake(5, 5, 5, 5)];
+        self.backgroundColor = [UIColor whiteColor];
     }
     return self;
 }
 
-- (void) updateViewByIndexPath:(NSIndexPath *)indexPath {
-    self.titleLabel.text = [NSString stringWithFormat:@"%@",indexPath];
-    if (indexPath.row == 0) {
-        self.backgroundColor = [UIColor greenColor];
-    } else if (indexPath.row == 1) {
-        self.backgroundColor = [UIColor orangeColor];
-    } else if (indexPath.row == 2){
-        self.backgroundColor = [UIColor lightGrayColor];
-    } else {
-        self.backgroundColor = [UIColor blueColor];
-    }
+- (void) updateViewByDetialView:(UIView *)detialView {
+    
+    self.detialView = detialView;
+    [self.contentView addSubview:self.detialView];
+    [self.detialView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero];
+      
 }
 @end

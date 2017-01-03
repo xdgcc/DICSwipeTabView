@@ -29,7 +29,7 @@ static NSString *DICSwipeTabDetailCollectionViewCellIdentifier = @"DICSwipeTabDe
 @interface DICSwipeTabView ()<UICollectionViewDelegate,UICollectionViewDataSource,UIScrollViewDelegate>
 
 @property (nonatomic, strong) NSArray *titleArray;
-@property (nonatomic, strong) NSArray *viewArray;
+@property (nonatomic, strong) NSMutableArray *viewArray;
 
 
 @property (nonatomic, assign) NSInteger tabCount;
@@ -51,9 +51,12 @@ static NSString *DICSwipeTabDetailCollectionViewCellIdentifier = @"DICSwipeTabDe
 
 @implementation DICSwipeTabView
 
-- (instancetype) initWithFrame:(CGRect)frame withTabBarHeight:(CGFloat)tabBarHeight withSeparateLineHeight:(CGFloat)separateLineHeight withTitleArray:(NSArray *)titleArray withViewArray:(NSArray *)viewArray {
+- (instancetype) initWithFrame:(CGRect)frame withTabBarHeight:(CGFloat)tabBarHeight withSeparateLineHeight:(CGFloat)separateLineHeight withTitleArray:(NSArray *)titleArray withViewArray:(NSMutableArray *)viewArray {
     self = [super initWithFrame:frame];
     if (self) {
+        
+        self.backgroundColor = [UIColor colorWithRed:239/255.0f green:239/255.0f blue:244/255.0f alpha:1];
+        
         self.tabBarHeight = tabBarHeight;
         self.separateLineHeight = separateLineHeight;
         self.detialViewHeight = frame.size.height - tabBarHeight - separateLineHeight;
@@ -76,7 +79,6 @@ static NSString *DICSwipeTabDetailCollectionViewCellIdentifier = @"DICSwipeTabDe
     
     self.topBarView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.tabBarHeight) collectionViewLayout:self.topBarViewLayout];
     self.topBarView.collectionViewLayout = self.topBarViewLayout;
-    self.topBarView.backgroundColor = [UIColor yellowColor];
     self.topBarView.tag = TopBarCollectionViewTag;
     self.topBarView.delegate = self;
     self.topBarView.dataSource = self;
@@ -91,7 +93,6 @@ static NSString *DICSwipeTabDetailCollectionViewCellIdentifier = @"DICSwipeTabDe
     self.bottomDetialView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, self.separateLineHeight + self.tabBarHeight, self.frame.size.width, self.detialViewHeight) collectionViewLayout:self.bottomDetialViewLayout];
     self.bottomDetialView.collectionViewLayout = self.bottomDetialViewLayout;
     self.bottomDetialView.pagingEnabled = YES;
-    self.bottomDetialView.backgroundColor = [UIColor blueColor];
     self.bottomDetialView.tag = BottomDetialCollectionViewTag;
     self.bottomDetialView.delegate = self;
     self.bottomDetialView.dataSource = self;
@@ -133,7 +134,7 @@ static NSString *DICSwipeTabDetailCollectionViewCellIdentifier = @"DICSwipeTabDe
         case BottomDetialCollectionViewTag: {
             //加载底部view的cell
             DICSwipeTabDetailCollectionViewCell *tmpCell = [collectionView dequeueReusableCellWithReuseIdentifier:DICSwipeTabDetailCollectionViewCellIdentifier forIndexPath:indexPath];
-            [tmpCell updateViewByIndexPath:indexPath];
+            [tmpCell updateViewByDetialView:self.viewArray[indexPath.row]];
             cell = tmpCell;
             break;
         }

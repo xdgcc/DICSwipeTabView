@@ -18,22 +18,21 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        self.backgroundColor = [UIColor redColor];
+        self.contentView.backgroundColor = [UIColor whiteColor];
         
         self.titleLabel = [[UILabel alloc] initForAutoLayout];
         [self.contentView addSubview:self.titleLabel];
-        [self.titleLabel autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsMake(5, 5, 5, 5)];
+        [self.titleLabel autoAlignAxisToSuperviewAxis:ALAxisHorizontal];
+        [self.titleLabel autoAlignAxisToSuperviewAxis:ALAxisVertical];
         
         self.lineView = [[UIView alloc] initForAutoLayout];
-        self.lineView.backgroundColor = [UIColor blackColor];
+        self.lineView.backgroundColor = [UIColor colorWithRed:151/255.0f green:151/255.0f blue:151/255.0f alpha:1];
         self.lineView.hidden = YES;
         [self.contentView addSubview:self.lineView];
-        [self.lineView autoSetDimension:ALDimensionHeight toSize:5];
-        [self.lineView autoPinEdgeToSuperviewEdge:ALEdgeLeading];
-        [self.lineView autoPinEdgeToSuperviewEdge:ALEdgeTrailing];
-        [self.lineView autoPinEdgeToSuperviewEdge:ALEdgeBottom];
-        
-        
+        [self.lineView autoSetDimension:ALDimensionHeight toSize:3];
+        [self.lineView autoPinEdge:ALEdgeLeading toEdge:ALEdgeLeading ofView:self.titleLabel withOffset:-10];
+        [self.lineView autoPinEdge:ALEdgeTrailing toEdge:ALEdgeTrailing ofView:self.titleLabel withOffset:10];
+        [self.lineView autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:5];
     }
     return self;
 }

@@ -14,5 +14,5 @@
               withTabBarHeight:(CGFloat)tabBarHeight
         withSeparateLineHeight:(CGFloat)separateLineHeight
                 withTitleArray:(NSArray *)titleArray
-                 withViewArray:(NSArray *)viewArray;
+                 withViewArray:(NSMutableArray *)viewArray;
 @end

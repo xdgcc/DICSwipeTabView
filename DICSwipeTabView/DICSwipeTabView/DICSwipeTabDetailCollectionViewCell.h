@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface DICSwipeTabDetailCollectionViewCell : UICollectionViewCell
-- (void) updateViewByIndexPath:(NSIndexPath *)indexPath;
+- (void) updateViewByDetialView:(UIView *)detialView;
 @end
